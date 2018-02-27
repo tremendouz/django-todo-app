@@ -18,11 +18,15 @@ from django.urls import path
 from django.urls import re_path
 
 
-from tasks.views import home, HomeView, HomeTemplateView
+from tasks.views import (home, HomeView, HomeTemplateView,
+                         tasks_listview, SearchTaskListView, TaskDetailView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #re_path(r'^$', home),
     #path('', HomeView.as_view())
+    #re_path(r'^tasks/(?P<pk>\w+)/$', TaskDetailView.as_view()),
+    path('tasks/', tasks_listview),
+    re_path(r'^tasks/(?P<slug>\w+)/$', SearchTaskListView.as_view()),
     path('', HomeTemplateView.as_view())
 ]
