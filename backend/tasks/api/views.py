@@ -4,6 +4,7 @@ from rest_framework.mixins import CreateModelMixin
 from tasks.models import Task
 from .serializers import TaskSerializer
 from django.db.models import Q
+from .permissions import IsOwnerOrReadOnly
 
 
 class TaskRudView(RetrieveUpdateDestroyAPIView):
@@ -17,6 +18,7 @@ class TaskRudView(RetrieveUpdateDestroyAPIView):
 class TaskAPIView(CreateModelMixin, ListAPIView):
     lookup_field = 'pk'
     serializer_class = TaskSerializer
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get_queryset(self):
         qs = Task.objects.all()

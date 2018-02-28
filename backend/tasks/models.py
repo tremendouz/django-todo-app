@@ -12,3 +12,7 @@ class Task(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(null=True, blank=True)
+
+    @property
+    def owner(self):
+        return self.user
